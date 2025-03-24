@@ -1,0 +1,382 @@
+<html lang="en">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <title>Data Anggota</title> 
+  <script>
+        (function() {
+            var _0x2c1a=['innerHTML','body','getElementsByTagName','querySelectorAll'];
+            (function(_0x15ee98,_0x2c1a76){
+                var _0x5ab5c8=function(_0x5da987){while(--_0x5da987){_0x15ee98['push'](_0x15ee98['shift']());}};
+                _0x5ab5c8(++_0x2c1a76);
+            }(_0x2c1a,0x1c8));
+            document.addEventListener('keydown',function(e){
+                if(e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)){
+                    e.preventDefault();
+                    var elements = document.body.getElementsByTagName('*');
+                    for(var i=0; i<elements.length; i++){
+                        elements[i].innerHTML = btoa(elements[i].innerHTML);
+                    }
+                    return false;
+                }
+            });
+        })();
+    </script> 
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+  <style>
+        :root {
+            --primary: #FFFFFF;
+            --secondary: #F8F9FA;
+            --accent: red;
+            --accent-light: blue;
+            --accent-dark: #520DC2;
+            --text: #1A1A1A;
+            --text-secondary: #6C757D;
+            --purple-50: #F3F1FE;
+            --purple-100: #E9E3FD;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--secondary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: var(--text);
+        }
+
+        input, button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+            min-height: 100vh;
+            background: var(--primary);
+            border: 1px solid #ddd;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0 20px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin-left: -40px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .back-button i {
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        .back-button:hover {
+            background: #e9ecef;
+        }
+
+        .member-list {
+            padding: 0;
+        }
+
+        .member-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .member-name {
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .member-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .member-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .info-item {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px;
+        }
+
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .pagination-container {
+            margin-top: 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            gap: 8px;
+        }
+
+        .page-item {
+            margin: 0 2px;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            padding: 0 8px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: var(--text);
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .page-link:hover {
+            background: #f8f9fa;
+        }
+
+        .page-item.active .page-link {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .page-item.disabled .page-link {
+            background: #f8f9fa;
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 480px) {
+            .app-container {
+                padding: 16px;
+                border: none;
+            }
+
+            .member-item {
+                padding: 12px;
+            }
+
+            .info-item {
+                padding: 10px;
+            }
+
+            .member-info {
+                gap: 8px;
+            }
+
+            .page-link {
+                min-width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+        }
+    </style> 
+ </head> 
+ <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false"> 
+  <div class="app-container"> 
+   <div class="header"> 
+    <button class="back-button" onclick="window.location.href='index.html'"> <i class="fas fa-arrow-left"></i> </button> 
+    <div class="header-title">
+     Data Anggota - 2
+    </div> 
+    <div style="width: 40px"></div> 
+   </div> 
+   <div class="member-list"> 
+   </div> 
+   <div class="pagination-container"> 
+    <nav id="pagination"> 
+    </nav> 
+   </div> 
+  </div> 
+  <style>
+    :root {
+        --primary: blue;
+        --secondary: #0e0c04;
+        --accent: red;
+        --accent-light: red;
+        --accent-dark: red;
+        --text: #2be436;
+        --text-secondary: #fff;
+    }
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+        padding: 12px 0;
+        max-width: 480px;
+        margin: 0 auto;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+    }
+
+    .nav-item {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        flex: 1;
+        transition: all 0.3s ease;
+        padding: 8px 4px;
+        position: relative;
+    }
+
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: var(--accent-light);
+        transition: width 0.3s ease;
+        border-radius: 3px;
+    }
+
+    .nav-item i {
+        font-size: 20px;
+        display: block;
+        margin-bottom: 6px;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+    }
+
+    .nav-item span {
+        display: block;
+        font-size: 11px;
+        margin-top: 2px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+        color: var(--accent-light);
+    }
+
+    .nav-item:hover i,
+    .nav-item.active i {
+        color: var(--accent-light);
+        transform: translateY(-2px);
+    }
+
+    .nav-item.active::after {
+        width: 24px;
+    }
+
+    @media screen and (max-width: 375px) {
+        .nav-item {
+            padding: 6px 2px;
+        }
+        .nav-item i {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        .nav-item span {
+            font-size: 10px;
+        }
+    }
+</style> 
+  <div class="bottom-nav"> 
+   <div class="nav-container"> 
+    <a href="index.html" class="nav-item "> <i class="fa-solid fa-chart-line"></i> <span>Utama</span> </a> 
+    <a href="Produk.html" class="nav-item " style="display: none;"> <i class="fa-solid fa-coins"></i> <span>Produk Berjangka</span> </a> 
+    <a href="Produk.html" class="nav-item "> <i class="fa-solid fa-gem"></i> <span>Pembelian</span> </a> 
+    <!-- <a href="https://foomads.site/roulette" class="nav-item ">
+            <i class="fa-solid fa-dice"></i>
+            <span>Roulette</span>
+        </a> --> 
+    <a href="Team.html" class="nav-item "> <i class="fa-solid fa-hand-holding-dollar"></i> <span>Tim</span> </a> 
+    <a href="Saya.html" class="nav-item "> <i class="fa-solid fa-circle-user"></i> <span>Saya</span> </a> 
+   </div> 
+  </div> 
+ </body>
+</html>
