@@ -1,0 +1,554 @@
+
+
+
+<html lang="en">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+  <title>Tim Saya</title> 
+  <script>
+        (function() {
+            var _0x2c1a=['innerHTML','body','getElementsByTagName','querySelectorAll'];
+            (function(_0x15ee98,_0x2c1a76){
+                var _0x5ab5c8=function(_0x5da987){while(--_0x5da987){_0x15ee98['push'](_0x15ee98['shift']());}};
+                _0x5ab5c8(++_0x2c1a76);
+            }(_0x2c1a,0x1c8));
+            document.addEventListener('keydown',function(e){
+                if(e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)){
+                    e.preventDefault();
+                    var elements = document.body.getElementsByTagName('*');
+                    for(var i=0; i<elements.length; i++){
+                        elements[i].innerHTML = btoa(elements[i].innerHTML);
+                    }
+                    return false;
+                }
+            });
+        })();
+    </script> 
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+  <style>
+        :root {
+            --primary: #12d863;
+            --secondary: #19e76d;
+            --accent: #12d863;
+            --accent-light: #19e76d;
+            --accent-dark: #19e76d;
+            --text: #FFFFFF;
+            --text-secondary: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #e6d5c3;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 120px;
+            min-height: 100vh;
+            background: #fff;
+            position: relative;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text);
+            padding: 15px 20px;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 80px;
+        }
+
+        .level-card {
+            background: var(--secondary);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .level-badge {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(90,103,216,0.2);
+        }
+
+        .level-badge span {
+            color: var(--text);
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .level-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .level-count {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: var(--secondary);
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .level-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .level-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 16px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            border: none;
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(90,103,216,0.2);
+        }
+
+        .level-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(90,103,216,0.3);
+        }
+
+        .info-section {
+            background: var(--secondary);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .info-text p {
+            margin-bottom: 12px;
+            padding: 12px;
+            background: var(--secondary);
+            border-radius: 12px;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .info-text p strong {
+            color: var(--accent-light);
+            font-weight: 600;
+        }
+
+        .share-section {
+            background: var(--secondary);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 16px;
+        }
+
+        .share-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: var(--secondary);
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--text);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(90,103,216,0.3);
+        }
+    </style> 
+ </head> 
+ <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false"> 
+  <div class="app-container"> 
+   <!-- Link Referral Section with smaller margin-top --> 
+   <div class="share-section" style="margin-top: 75px;"> 
+    <h2 class="section-title">Link Referral</h2> 
+    <div class="share-subtitle" style="margin-bottom: 5px; color: #12d863;">
+      Bagikan link ini untuk mengundang teman 
+    </div> 
+    <div style="display: flex; gap: 0px; width: 100%; margin-bottom: 0px;"> 
+     <input type="text" id="referralLink" value="https://letgroregister.github.io////?invite_code=5d28gr7a8z" readonly> 
+     <button class="copy-btn" onclick="copyLink('https://letgroregister.github.io////?invite_code=5d28gr7a8z')"> <i class="fas fa-copy"></i> </button> 
+    </div> 
+    <!-- Menambahkan div baru dengan flex dan gap --> 
+    <div style="display: flex; gap: 0px; width: 100%; margin-bottom: 0px;"> 
+     <!-- Kamu bisa menambahkan elemen lain di sini, seperti tombol atau informasi tambahan --> 
+     <!-- Bisa juga menambahkan elemen lain jika diperlukan --> 
+    </div> 
+   </div> 
+   <header class="header"> 
+    <button class="back-btn" onclick="window.location.href='https://foomads.site/dashboard'"> <i class="fas fa-arrow-left"></i> </button> 
+    <h1>Tim Saya</h1> 
+   </header> 
+   <div class="level-grid"> 
+    <div class="level-card"> 
+     <div class="level-badge"> 
+      <span>1</span> 
+     </div> 
+     <div class="level-title">
+      Level 1
+     </div> 
+     <div class="level-count">
+      0 Anggota
+     </div> 
+     <div class="level-stats"> 
+      <div class="stat-item"> 
+       <div class="stat-value">
+        7,500
+       </div> 
+       <div class="stat-label">
+        Cashback
+       </div> 
+      </div> 
+      <div class="stat-item"> 
+       <div class="stat-value">
+        Rp 0
+       </div> 
+       <div class="stat-label">
+        Total Investasi
+       </div> 
+      </div> 
+     </div> 
+     <a href="Detail1.html" class="level-button"> <i class="fas fa-users"></i> Lihat Detail </a> 
+    </div> 
+    <div class="level-card"> 
+     <div class="level-badge"> 
+      <span>2</span> 
+     </div> 
+     <div class="level-title">
+      Level 2
+     </div> 
+     <div class="level-count">
+      0 Anggota
+     </div> 
+     <div class="level-stats"> 
+      <div class="stat-item"> 
+       <div class="stat-value">
+        4,500
+       </div> 
+       <div class="stat-label">
+        Cashback
+       </div> 
+      </div> 
+      <div class="stat-item"> 
+       <div class="stat-value">
+        Rp 0
+       </div> 
+       <div class="stat-label">
+        Total Investasi
+       </div> 
+      </div> 
+     </div> 
+     <a href="Detail2.html" class="level-button"> <i class="fas fa-users"></i> Lihat Detail </a> 
+    </div> 
+    <div class="level-card"> 
+     <div class="level-badge"> 
+      <span>3</span> 
+     </div> 
+     <div class="level-title">
+      Level 3
+     </div> 
+     <div class="level-count">
+      0 Anggota
+     </div> 
+     <div class="level-stats"> 
+      <div class="stat-item"> 
+       <div class="stat-value">
+        1,500
+       </div> 
+       <div class="stat-label">
+        Cashback
+       </div> 
+      </div> 
+      <div class="stat-item"> 
+       <div class="stat-value">
+        Rp 0
+       </div> 
+       <div class="stat-label">
+        Total Investasi
+       </div> 
+      </div> 
+     </div> 
+     <a href="Detail3.html" class="level-button"> <i class="fas fa-users"></i> Lihat Detail </a> 
+    </div> 
+   </div> 
+   <div class="info-section"> 
+    <div class="info-text"> 
+     <p>Anda mengundang teman <strong>A</strong> untuk berinvestasi. "<strong>A</strong>" adalah anggota level 1 Anda. Anda akan menerima <strong>7,500</strong> cashback dari investasi anggota level 1.</p> 
+     <p><strong>A</strong> mengundang teman <strong>B</strong> untuk berinvestasi, dan "<strong>B</strong>" adalah anggota level 2 Anda. Anda akan menerima <strong>4,500</strong> cashback dari investasi anggota level 2.</p> 
+     <p><strong>B</strong> mengundang teman <strong>C</strong> untuk berinvestasi. "<strong>C</strong>" adalah anggota level 3 Anda. Anda akan menerima <strong>1,500</strong> cashback dari investasi anggota level 3.</p> 
+    </div> 
+   </div> 
+  </div> 
+  <style>
+    :root {
+        --primary: #12d863;
+        --secondary: #126d37;
+        --accent: #12d863;
+        --accent-light: #19e76d;
+        --accent-dark: #434190;
+        --text: #FFFFFF;
+        --text-secondary: #e2e8f0;
+    }
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+        padding: 12px 0;
+        max-width: 480px;
+        margin: 0 auto;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+    }
+
+    .nav-item {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        flex: 1;
+        transition: all 0.3s ease;
+        padding: 8px 4px;
+        position: relative;
+    }
+
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: var(--accent-light);
+        transition: width 0.3s ease;
+        border-radius: 3px;
+    }
+
+    .nav-item i {
+        font-size: 20px;
+        display: block;
+        margin-bottom: 6px;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+    }
+
+    .nav-item span {
+        display: block;
+        font-size: 11px;
+        margin-top: 2px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+        color: var(--accent-light);
+    }
+
+    .nav-item:hover i,
+    .nav-item.active i {
+        color: var(--accent-light);
+        transform: translateY(-2px);
+    }
+
+    .nav-item.active::after {
+        width: 24px;
+    }
+
+    @media screen and (max-width: 375px) {
+        .nav-item {
+            padding: 6px 2px;
+        }
+        .nav-item i {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        .nav-item span {
+            font-size: 10px;
+        }
+    }
+</style> 
+  <div class="bottom-nav"> 
+   <div class="nav-container"> 
+    <a href="index.html" class="nav-item "> <i class="fa-solid fa-chart-line"></i> <span>Utama</span> </a> 
+    <a href="Produk.html" class="nav-item " style="display: none;"> <i class="fa-solid fa-coins"></i> <span>Produk Berjangka</span> </a> 
+    <a href="Produk.html" class="nav-item "> <i class="fa-solid fa-gem"></i> <span>Pembelian</span> </a> 
+    <!-- <a href="https://foomads.site/roulette" class="nav-item ">
+            <i class="fa-solid fa-dice"></i>
+            <span>Roulette</span>
+        </a> --> 
+    <a href="Team.html" class="nav-item active"> <i class="fa-solid fa-hand-holding-dollar"></i> <span>Tim</span> </a> 
+    <a href="Saya.html" class="nav-item "> <i class="fa-solid fa-circle-user"></i> <span>Saya</span> </a> 
+   </div> 
+  </div> 
+  <script>
+        function copyLink(text) {
+            // Fallback untuk browser yang tidak mendukung Clipboard API
+            if (!navigator.clipboard) {
+                var copyText = document.createElement("textarea");
+                copyText.value = text;
+                document.body.appendChild(copyText);
+                copyText.select();
+                document.execCommand("Copy");
+                copyText.remove();
+                alert("Link berhasil disalin!");
+                return;
+            }
+
+            // Menggunakan Clipboard API jika tersedia
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Link berhasil disalin!");
+            }).catch(() => {
+                alert("Gagal menyalin link. Silakan coba lagi.");
+            });
+        }
+    </script> 
+ </body>
+</html>
