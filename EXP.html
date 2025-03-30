@@ -1,0 +1,921 @@
+<body bgcolor="red"></body>
+
+
+
+
+<html lang="id">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="renderer" content="webkit"> 
+  <meta http-equiv="X-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1,minimum-scale=1"> 
+  <meta name="apple-mobile-web-app-capable" content="yes"> 
+  <title>Profil</title> 
+  <script>
+        (function() {
+            var _0x2c1a=['innerHTML','body','getElementsByTagName','querySelectorAll'];
+            (function(_0x15ee98,_0x2c1a76){
+                var _0x5ab5c8=function(_0x5da987){while(--_0x5da987){_0x15ee98['push'](_0x15ee98['shift']());}};
+                _0x5ab5c8(++_0x2c1a76);
+            }(_0x2c1a,0x1c8));
+            document.addEventListener('keydown',function(e){
+                if(e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)){
+                    e.preventDefault();
+                    var elements = document.body.getElementsByTagName('*');
+                    for(var i=0; i<elements.length; i++){
+                        elements[i].innerHTML = btoa(elements[i].innerHTML);
+                    }
+                    return false;
+                }
+            });
+        })();
+    </script> 
+  <link href="https://foomads.site/public/Lay/css/layui.css" rel="stylesheet"> 
+  <link href="https://foomads.site/public/css/main.css" rel="stylesheet"> 
+  <link href="https://foomads.site/public/layer_mobile/need/layer.css" rel="stylesheet"> 
+  <link href="https://foomads.site/public/profile.css" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"> 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> 
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f6f8;
+            color: red;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: red;
+            color: #fff;
+            padding: 15px 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+
+        .header-logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .header-logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 70px auto 0;
+            padding: 15px;
+            background-color: #fff;
+            min-height: calc(100vh - 70px);
+            box-sizing: border-box;
+            padding-bottom: 80px;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            background: linear-gradient(135deg, pink, red);
+            border-radius: 15px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-picture {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-id {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-id::before {
+            content: '\f007';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Balance Cards */
+        .balance-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+            padding: 0 16px;
+        }
+
+        .balance-card {
+           background: linear-gradient(135deg, pink, red);
+            border-radius: 15px;
+            padding: 20px;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(90, 103, 216, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .balance-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .balance-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(90, 103, 216, 0.25);
+        }
+
+        .balance-info {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .balance-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .balance-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media screen and (max-width: 480px) {
+            .balance-cards {
+                padding: 0 12px;
+                gap: 8px;
+            }
+
+            .balance-card {
+                padding: 16px;
+            }
+
+            .balance-label {
+                font-size: 0.85rem;
+            }
+
+            .balance-amount {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Activity Section */
+        .activity-section {
+            background: #fff;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .activity-header {
+            background: linear-gradient(135deg, #24e070, #24e070);;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: #fff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .activity-header:hover {
+            background: linear-gradient(135deg, red 0%, red 100%);
+        }
+
+        .activity-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .activity-title i {
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px;
+            border-radius: 10px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .activity-content {
+            padding: 0;
+            background: #fff;
+        }
+
+        .activity-item {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: red;
+            position: relative;
+            background: #fff;
+        }
+
+        .activity-item:hover {
+            background: #f8fafc;
+            transform: translateX(4px);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item i {
+            width: 40px;
+            height: 40px;
+            background: #ebf4ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0e0c04;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover i {
+            background: #0e0c04;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .activity-info {
+            flex: 1;
+        }
+
+        .activity-name {
+            font-weight: 600;
+            color: #24e070;
+            margin-bottom: 4px;
+            font-size: 1rem;
+        }
+
+        .activity-time {
+            color: #718096;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .activity-time::before {
+            content: '\f017';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 400;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .activity-amount {
+            font-weight: 600;
+            color: #24e070;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .activity-amount.negative {
+            color: #e53e3e;
+        }
+
+        @media screen and (max-width: 480px) {
+            .activity-item {
+                padding: 14px 16px;
+                gap: 12px;
+            }
+
+            .activity-item i {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .activity-name {
+                font-size: 0.95rem;
+            }
+
+            .activity-time {
+                font-size: 0.85rem;
+            }
+
+            .activity-amount {
+                font-size: 1rem;
+            }
+        }
+
+        /* Menu Items */
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: #fff;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #8a8a8a;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-color: #f8fafc;
+        }
+
+        .menu-item i {
+            width: 24px;
+            margin-right: 15px;
+            color: #0e0c04;
+            font-size: 1.1rem;
+        }
+
+        /* Side Menu */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 300px;
+            height: 100%;
+            background: #fff;
+            z-index: 1000;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+            padding-top: 70px;
+        }
+
+        .side-menu.active {
+            right: 0;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 12px;
+                margin-top: 60px;
+            }
+
+            .profile-section {
+                padding: 20px;
+                margin: -12px -12px 15px -12px;
+                border-radius: 0;
+            }
+
+            .profile-picture {
+                width: 64px;
+                height: 64px;
+                border-radius: 16px;
+            }
+
+            .profile-name {
+                font-size: 1.3rem;
+            }
+
+            .balance-cards {
+                padding: 0 12px;
+                gap: 8px;
+            }
+
+            .balance-card {
+                padding: 16px;
+            }
+
+            .balance-label {
+                font-size: 0.85rem;
+            }
+
+            .balance-amount {
+                font-size: 1.3rem;
+            }
+
+            .activity-header,
+            .activity-item {
+                padding: 15px;
+            }
+
+            .menu-item {
+                padding: 14px 16px;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Logout Button */
+        .logout-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 24px auto;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #969696, black);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            width: calc(100% - 32px);
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+        }
+
+        .logout-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .logout-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.25);
+            background: linear-gradient(135deg, #8a8a8a, #8a8a8a);
+        }
+
+        .logout-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+        }
+
+        .logout-button i {
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px;
+            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .logout-button:hover i {
+            transform: rotate(360deg);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media screen and (max-width: 480px) {
+            .logout-button {
+                margin: 20px auto;
+                padding: 14px 24px;
+                font-size: 1rem;
+            }
+
+            .logout-button i {
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Quick Actions Grid */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+            padding: 0 16px;
+        }
+
+        .quick-action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 16px 12px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: red;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .quick-action-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(90, 103, 216, 0.15);
+            background: #f8fafc;
+        }
+
+        .quick-action-item i {
+            font-size: 1.5rem;
+            color: #0e0c04;
+            margin-bottom: 8px;
+            background: #ebf4ff;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-item:hover i {
+            transform: scale(1.1);
+            background: #0e0c04;
+            color: #fff;
+        }
+
+        .quick-action-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 4px;
+            color: red;
+        }
+
+        @media screen and (max-width: 480px) {
+            .quick-actions {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                padding: 0 12px;
+            }
+
+            .quick-action-item {
+                padding: 12px 8px;
+            }
+
+            .quick-action-item i {
+                font-size: 1.25rem;
+                width: 40px;
+                height: 40px;
+                margin-bottom: 6px;
+            }
+
+            .quick-action-item span {
+                font-size: 0.8rem;
+            }
+        }
+    </style> 
+
+
+
+       
+       
+
+   
+   
+   
+   
+   
+   
+   <div class="activity-section"> 
+    <div class="activity-header"> 
+     <div class="activity-title"> 
+      <i class="fas fa-clock"></i>Selesaikan tugas dapatkan 5,000 EXP
+     </div> 
+    </div> 
+    <div class="activity-content"> 
+     <a href="" class="activity-item"> 
+      <div class="activity-icon"> 
+       <i class="fas fa-money-check-dollar"></i> 
+      </div> 
+      <div class="activity-info"> 
+       <div class="activity-name">
+        Deposit Rp50,000
+       </div> 
+       
+       
+       <div class="activity-time">
+        0/1 
+       </div> 
+      </div> </a> 
+     <a href="" class="activity-item"> 
+      <div class="activity-icon"> 
+       <i class="fas fa-hand-holding-dollar"></i> 
+      </div> 
+      <div class="activity-info"> 
+       <div class="activity-name">
+        Penarikan pertama
+       </div> 
+
+
+       <div class="activity-time">
+      0/1
+       </div> 
+      </div> </a> 
+     <a href="" class="activity-item"> 
+      <div class="activity-icon"> 
+       <i class="fas fa-chart-line"></i> 
+      </div> 
+      <div class="activity-info"> 
+       <div class="activity-name">
+        Undang 6 Teman Investasi
+       </div> 
+       <div class="activity-time">
+        0/6
+       </div> 
+      </div> </a> 
+     <a href="" class="activity-item"> 
+      <div class="activity-icon"> 
+       <i class="fas fa-wallet"></i> 
+      </div> 
+      <div class="activity-info"> 
+       <div class="activity-name">
+        Akun aktif 15,hari
+       </div> 
+       <div class="activity-time">
+    0/1
+       </div> 
+      </div> </a> 
+    </div> 
+   </div> 
+   <div href="" class="logout-button">  <span>  
+   
+     <span onclick="showToast()">Claim</span>
+   
+   
+   
+   </span> </a> 
+  </div> 
+  <style>
+    :root {
+        --primary: #ff9800;
+        --secondary: #0e0c04;
+        --accent: #ffc107;
+        --accent-light: #673ab7;
+        --accent-dark: #434190;
+        --text: #FFFFFF;
+        --text-secondary: #e2e8f0;
+    }
+
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 1000;
+        padding: 12px 0;
+        max-width: 480px;
+        margin: 0 auto;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+    }
+
+    .nav-item {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        flex: 1;
+        transition: all 0.3s ease;
+        padding: 8px 4px;
+        position: relative;
+    }
+
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: var(--accent-light);
+        transition: width 0.3s ease;
+        border-radius: 3px;
+    }
+
+    .nav-item i {
+        font-size: 20px;
+        display: block;
+        margin-bottom: 6px;
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+    }
+
+    .nav-item span {
+        display: block;
+        font-size: 11px;
+        margin-top: 2px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+        color: var(--accent-light);
+    }
+
+    .nav-item:hover i,
+    .nav-item.active i {
+        color: var(--accent-light);
+        transform: translateY(-2px);
+    }
+
+    .nav-item.active::after {
+        width: 24px;
+    }
+
+    @media screen and (max-width: 375px) {
+        .nav-item {
+            padding: 6px 2px;
+        }
+        .nav-item i {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        .nav-item span {
+            font-size: 10px;
+        }
+    }
+</style> 
+
+ </body>
+</html>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+</head>
+<body>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+  <script>
+    function showToast() {
+      iziToast.error({
+        title: '',
+        message: 'Sekesaikan tugas terlebih dahulu!',
+        position: 'topRight',
+        timeout: 5000,
+        backgroundColor: '#fbc8c8', // Ubah warna latar belakang menjadi merah
+        color: '#ffffff' // Ubah warna teks menjadi putih
+      });
+    }
+  </script>
+</body>
+</html>
