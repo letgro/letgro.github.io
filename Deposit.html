@@ -1,0 +1,609 @@
+<html>
+ <head> 
+  <meta charset="utf-8"> 
+  <title>Topup Saldo</title> 
+  <script>
+        (function() {
+            var _0x2c1a=['innerHTML','body','getElementsByTagName','querySelectorAll'];
+            (function(_0x15ee98,_0x2c1a76){
+                var _0x5ab5c8=function(_0x5da987){while(--_0x5da987){_0x15ee98['push'](_0x15ee98['shift']());}};
+                _0x5ab5c8(++_0x2c1a76);
+            }(_0x2c1a,0x1c8));
+            document.addEventListener('keydown',function(e){
+                if(e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)){
+                    e.preventDefault();
+                    var elements = document.body.getElementsByTagName('*');
+                    for(var i=0; i<elements.length; i++){
+                        elements[i].innerHTML = btoa(elements[i].innerHTML);
+                    }
+                    return false;
+                }
+            });
+        })();
+    </script> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+  <style>
+        :root {
+            --primary: #FFFFFF;
+            --secondary: #F8F9FA;
+            --accent: red;
+            --accent-light: #3D8BFD;
+            --accent-dark: red;
+            --text: #212529;
+            --text-secondary: #6C757D;
+            --border-color: #DEE2E6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--secondary);
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 100px;
+            min-height: 100vh;
+            background: var(--primary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.9);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin: -20px -20px 20px -20px;
+          background-color: red;
+            border-bottom: 1px solid #ddd;
+            width: calc(100% + 40px);
+            position: relative;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFFFFF;
+            flex-grow: 1;
+            text-align: center;
+            margin-left: -40px;
+        }
+
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: var(--secondary);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .back-btn img {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+        .content {
+            padding: 0;
+            background: transparent;
+            position: relative;
+        }
+
+        .input-card {
+            background: var(--primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            background: var(--secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .currency-label {
+            font-weight: 600;
+            color: var(--text);
+            margin-right: 8px;
+        }
+
+        input[type="number"] {
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            color: var(--text);
+            width: 100%;
+            outline: none;
+        }
+
+        input[type="number"]::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .payment-button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            font-weight: 600;
+            font-size: 0.938rem;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .qris-container {
+            background: var(--primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .qris-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .qris-container p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 16px;
+        }
+
+        .payment-info {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .countdown-timer {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .security-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            background: var(--secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+
+        .security-info i {
+            font-size: 1.125rem;
+            color: var(--accent);
+        }
+
+        .security-info p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .trust-badges {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+            padding: 0 20px;
+        }
+
+        .trust-badge {
+            background: var(--primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .trust-badge i {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .trust-badge h4 {
+            color: var(--text);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin: 8px 0 4px;
+        }
+
+        .trust-badge p {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .payment-partners {
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .payment-partners h3 {
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .partner-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .partner-logo {
+            height: 30px;
+            opacity: 0.7;
+        }
+
+        .qris-icon {
+            font-size: 30px;
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .amount-btn {
+            background: var(--secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--text);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .amount-btn.selected {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        @media (max-width: 480px) {
+            .app-container {
+                padding: 16px;
+                border: none;
+                box-shadow: none;
+            }
+
+            .input-card {
+                margin: 0 -16px 16px -16px;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+        }
+    </style> 
+ </head> 
+ <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false"> 
+  <div class="app-container"> 
+   <div class="header"> 
+    <div class="back-btn" onclick="window.location.href='index.html'"> 
+     <img src="https://foomads.site/public/left.png" alt="Back"> 
+    </div> 
+    <div class="header-title">
+     Topup Saldo
+    </div> 
+    <div class="back-btn" onclick="window.location.href='Riwayattopup.html'"> 
+     <img src="https://foomads.site/public/imgss/iconlog.png" alt="History"> 
+    </div> 
+   </div> 
+   <div class="content"> 
+    <div class="input-card"> 
+     <form action="https://foomads.site/user/payment/submit" id="depositSubmit" method="post"> 
+      <input type="hidden" name="_token" value="iXicpsLwAys66L8gfM0G5Iysj8xdiQ15UejcHyHI"> 
+      <input type="hidden" name="custom_token" value="9751650378102"> 
+      <input type="hidden" id="finalAmountInput" name="finalAmount"> 
+      <div class="input-group"> 
+       <span class="currency-label">Rp</span> 
+       <input type="number" id="amount" name="amount" placeholder="Masukkan nominal" required> 
+      </div> 
+      <div class="quick-amounts"> 
+       <div class="amount-btn" data-amount="50000">
+        50.000
+       </div> 
+       <div class="amount-btn" data-amount="100000">
+        100.000
+       </div> 
+       <div class="amount-btn" data-amount="50000">
+        250.000
+       </div> 
+       <div class="amount-btn" data-amount="100000">
+        500.000
+       </div> 
+       <div class="amount-btn" data-amount="500000">
+        700.000
+       </div> 
+       <div class="amount-btn" data-amount="1000000">
+        1.000.000
+       </div> 
+      </div> 
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 20px;"> 
+       <!--<button class="payment-button" id="Recharge" onclick="deposit()" style="background: blue;">--> 
+       <!--    Bank jayapay--> 
+       <!--</button>--> 
+       <!--<button class="payment-button" id="Recharge" onclick="deposit()" style="background: #ff9800c4;">--> 
+       <!--</button>--> 
+       <button class="payment-button" id="RechargeQRIS" onclick="depositWithQRIS()" type="button" style="background: blue;">Deposit sekarang</button> 
+      </div> 
+     </form> 
+    </div> 
+    <div id="qrisImage" style="display: none;" class="qris-container"> 
+     <img src="QR.png" alt="QRIS" class="qris-image"> 
+     <p>Pembayaran bisa dilakukan melalui semua bank atau e-wallet.</p> 
+     <div id="finalAmountText" class="payment-info"></div> 
+     <div id="countdownTimer" class="countdown-timer">
+      proses
+     </div> 
+    </div> 
+   </div> 
+   <div class="payment-partners"> 
+    <h3>Didukung Oleh</h3> 
+    <div class="partner-logos"> 
+     <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" alt="BCA" class="partner-logo"> 
+     <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Logo_BRI.png" alt="BRI" class="partner-logo"> 
+     <img src="https://upload.wikimedia.org/wikipedia/id/5/55/BNI_logo.svg" alt="BNI" class="partner-logo"> 
+     <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg" alt="Mandiri" class="partner-logo"> 
+     <i class="fas fa-qrcode qris-icon" title="QRIS"></i> 
+    </div> 
+   </div> 
+   <!-- Modal Auto Top Up --> 
+   <div class="modal" id="autoTopupModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;"> 
+    <div class="modal-content" style="background: var(--primary); width: 90%; max-width: 400px; margin: 50px auto; border-radius: 20px; padding: 20px; position: relative;"> 
+     <div class="modal-header" style="margin-bottom: 20px;"> 
+      <h4 style="margin: 0; color: var(--text);">Pilih Metode Pembayaran</h4> 
+      <button onclick="closeAutoTopup()" style="position: absolute; right: 20px; top: 20px; background: none; border: none; font-size: 20px; cursor: pointer;">×</button> 
+     </div> 
+     <form action="https://foomads.site/auto-topup" method="POST" id="autoTopupForm" onsubmit="return validateForm()"> 
+      <input type="hidden" name="_token" value="iXicpsLwAys66L8gfM0G5Iysj8xdiQ15UejcHyHI"> 
+      <input type="hidden" name="amount" id="modalAmount"> 
+      <input type="hidden" name="payment_method" id="payment_method"> 
+      <input type="hidden" name="payment_channel" id="payment_channel"> 
+      <div style="margin-bottom: 20px;"> 
+       <label style="display: block; margin-bottom: 10px; color: var(--text);">Metode Pembayaran</label> 
+       <select name="payment_channel_select" id="payment_channel_select" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; background: var(--secondary);" required> <option value="">Pilih metode pembayaran</option> <optgroup label="Virtual Account (va)"> <option value="va_bca">BCA</option> <option value="va_bri">BRI</option> <option value="va_bni">BNI</option> <option value="va_mandiri">Mandiri</option> <option value="va_cimb">CIMB Niaga</option> <option value="va_bsi">BSI</option> <option value="va_permata">Permata</option> </optgroup> 
+        <!-- <optgroup label="Convenience Store (cstore)">
+                                <option value="cstore_alfamart">Alfamart</option>
+                                <option value="cstore_indomaret">Indomaret</option>
+                            </optgroup> --> <optgroup label="QRIS"> <option value="qris_qris">QRIS</option> </optgroup> </select> 
+      </div> 
+      <button type="submit" class="payment-button" style="margin: 0;"> Lanjut Pembayaran </button> 
+     </form> 
+    </div> 
+   </div> 
+   <script>
+    
+    
+    </script> 
+   <script>
+            function validateForm() {
+                var paymentMethod = document.getElementById('payment_method').value;
+                var paymentChannel = document.getElementById('payment_channel').value;
+                var amount = document.getElementById('amount').value;
+                
+                if (amount > 5000000) {
+                    alert('Maksimal top up adalah Rp 5.000.000');
+                    return false;
+                }
+                
+                if (!paymentMethod || !paymentChannel) {
+                    alert('Silakan pilih metode pembayaran terlebih dahulu');
+                    return false;
+                }
+                
+                // Debug log
+                console.log('Form validated with:');
+                console.log('Payment Method:', paymentMethod);
+                console.log('Payment Channel:', paymentChannel);
+                
+                return true;
+            }
+
+            var finalAmount = 0; 
+            var countdown = 1; 
+            var countdownInterval;
+
+            function deposit(){
+                var amount = document.getElementById('amount').value;
+                if (amount == ''){
+                    alert("Masukkan jumlah topup");
+                    return 0;
+                }
+                var button = document.getElementById('Recharge');
+                button.disabled = true;
+                document.getElementById('depositSubmit').submit();
+            }
+
+            function depositWithQRIS() {
+                var amount = document.getElementById('amount').value;
+
+                if (amount >= 50000) {
+                    var mainAmount = Math.floor(amount / 1000);
+                    var randomCode = Math.floor(Math.random() * 900 + 100);
+                    finalAmount = parseInt(mainAmount + "" + randomCode);
+
+                    document.getElementById('finalAmountInput').value = finalAmount;
+                    document.getElementById('amount').value = finalAmount;
+
+                    document.getElementById('finalAmountText').innerHTML = `
+                        <div class="payment-info">
+                            Jumlah yang harus dibayar: 
+                            <span class="payment-amount">Rp ` + finalAmount.toLocaleString() + `</span>
+                            <p class="payment-note">Silakan bayar sesuai dengan angka ini untuk verifikasi otomatis.</p>
+                        </div>
+                    `;
+
+                    document.getElementById('qrisImage').style.display = 'block';
+                    startCountdown();
+                } else {
+                    alert('Jumlah topup harus lebih dari atau sama dengan Rp 50,000.');
+                }
+            }
+
+            function startCountdown() {
+                countdownInterval = setInterval(function() {
+                    countdown--;
+                    document.getElementById('countdownTimer').innerHTML = 'Masuk otomatis dalam 5 menit';
+                    if (countdown === 0) {
+                        clearInterval(countdownInterval);
+                        proceedWithPayment();
+                    }
+                }, 1000);
+            }
+
+            function proceedWithPayment() {
+                var formData = new FormData(document.getElementById('depositSubmit'));
+                fetch("https://foomads.site/user/payment/submit", {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Topup berhasil! Order number: " + data.orderNum);
+                    } else {
+                        alert("Terjadi kesalahan: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error: ", error);
+                    alert(" Silahkan transfer sesuai nominal di bawah dengan kode unik ");
+                });
+            }
+
+            function openAutoTopup() {
+                var amount = document.getElementById('amount').value;
+                if (!amount || amount < 10000) {
+                    alert('Minimal top up Rp 50.000');
+                    return;
+                }
+                document.getElementById('modalAmount').value = amount;
+                document.getElementById('autoTopupModal').style.display = 'block';
+            }
+
+            function closeAutoTopup() {
+                document.getElementById('autoTopupModal').style.display = 'none';
+            }
+
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                var modal = document.getElementById('autoTopupModal');
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+
+            // Handle payment channel selection
+            document.getElementById('payment_channel_select').addEventListener('change', function() {
+                var value = this.value;
+                var [method, channel] = value.split('_');
+                document.getElementById('payment_method').value = method;
+                document.getElementById('payment_channel').value = channel;
+                
+                // Debug log
+                console.log('Selected value:', value);
+                console.log('Method:', method);
+                console.log('Channel:', channel);
+            });
+
+            // Add form submit handler
+            document.getElementById('autoTopupForm').addEventListener('submit', function(e) {
+                // Debug log
+                console.log('Form submitted with:');
+                console.log('Payment Method:', document.getElementById('payment_method').value);
+                console.log('Payment Channel:', document.getElementById('payment_channel').value);
+            });
+
+            // Handle quick amount selection
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const amount = this.dataset.amount;
+                    document.getElementById('amount').value = amount;
+                    
+                    // Remove selected class from all buttons
+                    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+                    // Add selected class to clicked button
+                    this.classList.add('selected');
+                });
+            });
+
+            // Handle manual input to remove selected state from buttons
+            document.getElementById('amount').addEventListener('input', function() {
+                document.querySelectorAll('.amount-btn').forEach(btn => {
+                    if (btn.dataset.amount === this.value) {
+                        btn.classList.add('selected');
+                    } else {
+                        btn.classList.remove('selected');
+                    }
+                });
+            });
+
+            function validateAmount(input) {
+                if (input.value > 5000000) {
+                    input.value = 5000000;
+                    alert('Maksimal top up adalah Rp 5.000.000');
+                }
+            }
+        </script> 
+  </div> 
+ </body>
+</html>
