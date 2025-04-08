@@ -1,0 +1,590 @@
+<body bgcolor="red"></body>
+
+
+
+<html>
+ <head> 
+  <meta charset="utf-8"> 
+  <title>QR saya</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+  <meta name="keywords" content=""> 
+  <meta name="description" content=""> 
+  <link href="https://vastra-fashion.com/public/Lay/css/layui.css" rel="stylesheet"> 
+  <link href="https://vastra-fashion.com/public/css/main.css" rel="stylesheet"> 
+  <style type="text/css">
+        .topname {
+            line-height: 46px;
+            font-weight: bold;
+            font-size: 14px;
+            width: 75%;
+            text-align: center;
+            color: #000;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+
+        .typeitem {
+            float: left;
+            width: 50%;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .over {
+            border-bottom: 1px solid #000;
+        }
+        p.sposp {
+            border: 1px solid #000;
+            padding: 2px 12px;
+            border-radius: 50px;
+        }
+    </style> 
+  <link id="layuicss-layer" rel="stylesheet" href="https://vastra-fashion.com/public/Lay/css/modules/layer/default/layer.css" media="all"> 
+ </head> 
+ <body style="background-size: 100% auto; background: #fff;"> 
+  <div style="width: 100%; margin: 0 auto; background: #a3ab5f; border-bottom: 0px solid #117546; " class="top"> 
+   <div style="float:left; text-align:left; line-height:46px;width:50%;" id="btnClose" onclick="window.location.href='index.html'"> 
+    <img style="margin-left: 15px;margin-top: 10px;" src="https://vastra-fashion.com/public/icons8-chevron-left-30.png" alt=""> 
+   </div> 
+   <font class="topname" style="color: #fff;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Barcode Akun</font></font></font> 
+   <div style="float:right; text-align:right; line-height:46px;width:50%;"> 
+   </div> 
+  </div> 
+  <div style=" max-width:450px; margin:0 auto;margin-top: 70px;"> 
+   <div style=""> 
+    <ul> 
+    </ul> 
+   </div> 
+   <div style=" width:100%;margin:0 auto; position:relative;" id="itemlist"> 
+    <div style="padding:2px; width:100%; margin:0 auto; margin-top:50px;"> 
+     <div style="border-radius: 5px; color:#fff; text-align:center; margin-top:35px;position:relative;">
+
+      <br>
+     </div> 
+    </div> 
+    <div class="layui-flow-more">
+    
+    </div> 
+   </div> 
+  </div> 
+ </body>
+</html>
+
+
+
+
+
+
+<html lang="en">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Profile</title> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+  <style>
+        :root {
+            --primary-color: #28d133;
+            --text-primary: #1F2937;
+            --text-secondary: #64748b;
+            --background: #F8FAFC;
+            --white: #FFFFFF;
+            --yellow: #fbbf24;
+            --blue: #0c1727;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 180px;
+            background: var(--primary-color);
+            border-radius: 0 0 30px 30px;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: transparent;
+            min-height: 100vh;
+            position: relative;
+            padding: 24px;
+        }
+
+        .profile-card {
+            background: var(--white);
+            margin-bottom: 24px;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            flex: 1;
+            padding-top: 4px;
+        }
+
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #111827;
+        }
+
+        .profile-email {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .edit-profile {
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-decoration: none;
+            padding: 6px 0;
+        }
+
+        .balance-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .balance-item {
+            flex: 1;
+            min-width: 140px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 16px;
+        }
+
+        .balance-item.yellow {
+            background: #FEF9C3;
+        }
+
+        .balance-item.blue {
+            background: #EFF6FF;
+        }
+
+        .balance-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .balance-icon.yellow {
+            background: #FDE047;
+            color: #92400E;
+        }
+
+        .balance-icon.blue {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        .balance-icon i {
+            font-size: 20px;
+        }
+
+        .balance-info {
+            flex: 10;
+            min-width: 0;
+        }
+
+        .balance-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .balance-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .reminder-card {
+            background: var(--white);
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border-bottom: 5px solid red;
+            box-shadow: 0 50px 8px rgba(0, 0, 0, 0.0);
+        }
+
+        .reminder-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: blue;
+        }
+
+        .reminder-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .card-section {
+            margin-bottom: 24px;
+            padding-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .saved-card {
+            background: #F8FAFC;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .card-icon i {
+            font-size: 20px;
+        }
+
+        .card-details .number {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #111827;
+        }
+
+        .card-details .name {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .card-valid {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .detail-item {
+            text-align: center;
+            padding: 16px;
+            background: var(--white);
+            border-radius: 16px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .detail-item:active {
+            transform: scale(0.98);
+        }
+
+        .detail-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #F1F5F9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: var(--primary-color);
+        }
+
+        .detail-icon i {
+            font-size: 20px;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: #4B5563;
+            font-weight: 500;
+        }
+
+        .number-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .eye-button {
+            background: none;
+            border: none;
+            padding: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .eye-button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 380px) {
+            .container {
+                padding: 16px;
+            }
+
+            .profile-card {
+                padding: 16px;
+            }
+
+            .balance-row {
+                flex-direction: column;
+            }
+
+            .balance-item {
+                width: 100%;
+            }
+
+            .balance-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .balance-amount {
+                font-size: 15px;
+            }
+        }
+    </style> 
+
+
+   
+   <div class="reminder-card"> 
+    <div class="reminder-title">
+<img src="Qr.jpg" width="410px" height="350px">
+
+
+  <script>
+        function toggleNumber() {
+            const numberElement = document.getElementById('accountNumber');
+            const eyeIcon = document.getElementById('eyeIcon');
+            const originalNumber = '';
+            const maskedNumber = '*'.repeat(originalNumber.length - 4) + originalNumber.slice(-4);
+            
+            if (numberElement.textContent === maskedNumber) {
+                numberElement.textContent = originalNumber;
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                numberElement.textContent = maskedNumber;
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+    </script> 
+  <style>
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: black;
+        border-radius: 24px 24px 0 0;
+        padding: 12px 0 16px;
+        box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #94A3B8;
+        position: relative;
+        z-index: 2;
+        width: 64px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-item i {
+        font-size: 24px;
+        margin-bottom: 6px;
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-item span {
+        font-size: 11px;
+        font-weight: 500;
+        color: #94A3B8;
+        transition: all 0.3s ease;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .nav-item.active {
+        color: #28d133;;
+    }
+
+    .nav-item.active i {
+        transform: translateY(-4px);
+    }
+
+    .nav-item.active span {
+        color: #28d133;;
+    }
+
+    .nav-indicator {
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        background: #F5F3FF;
+        border-radius: 50%;
+        top: -10px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+    }
+
+    /* Precise positioning for each menu item */
+    .nav-item:nth-child(1).active ~ .nav-indicator { left: calc(10% - 24px); }
+    .nav-item:nth-child(2).active ~ .nav-indicator { left: calc(30% - 24px); }
+    .nav-item:nth-child(3).active ~ .nav-indicator { left: calc(50% - 24px); }
+    .nav-item:nth-child(4).active ~ .nav-indicator { left: calc(70% - 24px); }
+    .nav-item:nth-child(5).active ~ .nav-indicator { left: calc(90% - 24px); }
+
+    @media screen and (max-width: 360px) {
+        .bottom-nav {
+            padding: 10px 0 14px;
+        }
+
+        .nav-container {
+            max-width: 360px;
+        }
+
+        .nav-item {
+            width: 56px;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 10px;
+        }
+
+        .nav-indicator {
+            width: 42px;
+            height: 42px;
+            top: -8px;
+        }
+
+        /* Adjust indicator position for smaller screens */
+        .nav-item:nth-child(1).active ~ .nav-indicator { left: calc(10% - 21px); }
+        .nav-item:nth-child(2).active ~ .nav-indicator { left: calc(30% - 21px); }
+        .nav-item:nth-child(3).active ~ .nav-indicator { left: calc(50% - 21px); }
+        .nav-item:nth-child(4).active ~ .nav-indicator { left: calc(70% - 21px); }
+        .nav-item:nth-child(5).active ~ .nav-indicator { left: calc(90% - 21px); }
+    }
+
+    @supports (padding: max(0px)) {
+        .bottom-nav {
+            padding-bottom: max(16px, env(safe-area-inset-bottom));
+        }
+    }
+</style> 
+
+  </div> 
+ </body>
+</html>
+
+

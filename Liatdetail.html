@@ -1,0 +1,519 @@
+<html lang="en">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Data Anggota</title> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"> 
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            background: #28d;
+            color: white;
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-button {
+            border: none;
+            background: none;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .back-button:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .back-button:active {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .back-arrow {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+
+        .back-arrow::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-left: 2px solid white;
+            border-bottom: 2px solid white;
+            position: absolute;
+            left: 6px;
+            top: 4px;
+            transform: rotate(45deg);
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            flex: 1;
+            color: white;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .stat-box {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4C2A86;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #868e96;
+            font-weight: 500;
+        }
+
+        .search-container {
+            padding: 0 16px;
+            margin-bottom: 16px;
+        }
+
+        .search-box {
+            background: white;
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .search-icon {
+            color: #868e96;
+            font-size: 16px;
+        }
+
+        .search-input {
+            border: none;
+            flex: 1;
+            font-size: 14px;
+            color: #212529;
+        }
+
+        .search-input:focus {
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #adb5bd;
+        }
+
+        .member-list {
+            padding: 0 16px;
+        }
+
+        .member-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .member-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #f1f3f5;
+        }
+
+        .member-avatar {
+            width: 40px;
+            height: 40px;
+            background: #e9ecef;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .member-main {
+            flex: 1;
+        }
+
+        .member-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 2px;
+        }
+
+        .member-phone {
+            font-size: 13px;
+            color: #868e96;
+        }
+
+        .member-status {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: #E8F8F0;
+            color: #1B7A44;
+        }
+
+        .status-inactive {
+            background: #FFF8E6;
+            color: #95631C;
+        }
+
+        .member-details {
+            padding: 12px 16px;
+            background: #f8f9fa;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .detail-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .detail-label {
+            font-size: 11px;
+            color: #868e96;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .detail-value.highlight {
+            color: #4C2A86;
+        }
+
+        @media screen and (min-width: 481px) {
+            body {
+                padding: 20px;
+                background: linear-gradient(135deg, #4C2A86 0%, #6B3CC9 100%);
+            }
+            .container {
+                border-radius: 16px;
+                overflow: hidden;
+                min-height: auto;
+                box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+            }
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="container"> 
+   <div class="header"> 
+    <div class="back-button"> 
+     <div class="back-arrow"></div> 
+    </div> 
+    <h1>Data Anggota</h1> 
+   </div> 
+   <div class="stats-container"> 
+    <div class="stat-box"> 
+     <div class="stat-value">
+      0
+     </div> 
+     <div class="stat-label">
+      Total Anggota
+     </div> 
+    </div> 
+    <div class="stat-box"> 
+     <div class="stat-value">
+      0
+     </div> 
+     <div class="stat-label">
+      Anggota Aktif
+     </div> 
+    </div> 
+   </div> 
+   <div class="search-container"> 
+    <form action="" method="GET" id="searchForm"> 
+     <div class="search-box"> 
+      <div class="search-icon">
+       🔍
+      </div> 
+      <input type="text" class="search-input" placeholder="Cari nama atau nomor telepon..." name="search" value="" oninput="submitSearch(this.value)"> 
+     </div> 
+    </form> 
+   </div> 
+   
+   
+   
+   
+       <html>
+ <head> 
+  <meta charset="utf-8"> 
+  <title>History</title> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+  <meta name="keywords" content=""> 
+  <meta name="description" content=""> 
+  <link href="https://vastra-fashion.com/public/Lay/css/layui.css" rel="stylesheet"> 
+  <link href="https://vastra-fashion.com/public/css/main.css" rel="stylesheet"> 
+  <style type="text/css">
+        .topname {
+            line-height: 46px;
+            font-weight: bold;
+            font-size: 14px;
+            width: 75%;
+            text-align: center;
+            color: #000;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+
+        .typeitem {
+            float: left;
+            width: 50%;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .over {
+            border-bottom: 1px solid #000;
+        }
+        p.sposp {
+            border: 1px solid #000;
+            padding: 2px 12px;
+            border-radius: 50px;
+        }
+    </style> 
+  <link id="layuicss-layer" rel="stylesheet" href="https://vastra-fashion.com/public/Lay/css/modules/layer/default/layer.css" media="all"> 
+ </head> 
+
+  <div style=" max-width:450px; margin:0 auto;margin-top: 70px;"> 
+   <div style=""> 
+    <ul> 
+    </ul> 
+   </div> 
+   <div style=" width:100%;margin:0 auto; position:relative;" id="itemlist"> 
+    <div style="padding:2px; width:100%; margin:0 auto; margin-top:50px;"> 
+     <div style="border-radius: 5px; color:#fff; text-align:center; margin-top:35px;position:relative;">
+      <img src="https://vastra-fashion.com/public/imgs/no.png" style=" width:100%;">
+      <br>
+     </div> 
+    </div> 
+    <div class="layui-flow-more">
+   Tidak ada Anggota 
+    </div> 
+   </div> 
+  </div> 
+ </body>
+</html>
+   
+   
+   
+   
+   
+   
+   <div class="member-list"> 
+   </div> 
+   <div style="padding: 16px;"> 
+    <nav id="pagination"> 
+    </nav> 
+   </div> 
+  </div> 
+  <style>
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: white;
+        border-radius: 24px 24px 0 0;
+        padding: 12px 0 16px;
+        box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.08);
+        z-index: 1000;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #94A3B8;
+        position: relative;
+        z-index: 2;
+        width: 64px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-item i {
+        font-size: 24px;
+        margin-bottom: 6px;
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-item span {
+        font-size: 11px;
+        font-weight: 500;
+        color: #94A3B8;
+        transition: all 0.3s ease;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .nav-item.active {
+        color: #28d133;;
+    }
+
+    .nav-item.active i {
+        transform: translateY(-4px);
+    }
+
+    .nav-item.active span {
+        color: #28d133;;
+    }
+
+    .nav-indicator {
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        background: #F5F3FF;
+        border-radius: 50%;
+        top: -10px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+    }
+
+    /* Precise positioning for each menu item */
+    .nav-item:nth-child(1).active ~ .nav-indicator { left: calc(10% - 24px); }
+    .nav-item:nth-child(2).active ~ .nav-indicator { left: calc(30% - 24px); }
+    .nav-item:nth-child(3).active ~ .nav-indicator { left: calc(50% - 24px); }
+    .nav-item:nth-child(4).active ~ .nav-indicator { left: calc(70% - 24px); }
+    .nav-item:nth-child(5).active ~ .nav-indicator { left: calc(90% - 24px); }
+
+    @media screen and (max-width: 360px) {
+        .bottom-nav {
+            padding: 10px 0 14px;
+        }
+
+        .nav-container {
+            max-width: 360px;
+        }
+
+        .nav-item {
+            width: 56px;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 10px;
+        }
+
+        .nav-indicator {
+            width: 42px;
+            height: 42px;
+            top: -8px;
+        }
+
+        /* Adjust indicator position for smaller screens */
+        .nav-item:nth-child(1).active ~ .nav-indicator { left: calc(10% - 21px); }
+        .nav-item:nth-child(2).active ~ .nav-indicator { left: calc(30% - 21px); }
+        .nav-item:nth-child(3).active ~ .nav-indicator { left: calc(50% - 21px); }
+        .nav-item:nth-child(4).active ~ .nav-indicator { left: calc(70% - 21px); }
+        .nav-item:nth-child(5).active ~ .nav-indicator { left: calc(90% - 21px); }
+    }
+
+    @supports (padding: max(0px)) {
+        .bottom-nav {
+            padding-bottom: max(16px, env(safe-area-inset-bottom));
+        }
+    }
+</style> 
+  <div class="bottom-nav"> 
+  </div> 
+  <script>
+        let searchTimeout;
+        
+        function submitSearch(value) {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                document.getElementById('searchForm').submit();
+            }, 500);
+        }
+
+        // Handle back button
+        document.querySelector('.back-button').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script> 
+ </body>
+</html>
+

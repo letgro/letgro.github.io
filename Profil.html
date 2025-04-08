@@ -1,0 +1,640 @@
+<html lang="en">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Profile</title> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+  <style>
+        :root {
+            --primary-color: #28d;
+            --text-primary: #1F2937;
+            --text-secondary: #64748b;
+            --background: #F8FAFC;
+            --white: #FFFFFF;
+            --yellow: #fbbf;
+            --blue: #0c1727;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 180px;
+            background: var(--primary-color);
+            border-radius: 0 0 30px 30px;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: transparent;
+            min-height: 100vh;
+            position: relative;
+            padding: 24px;
+        }
+
+        .profile-card {
+            background: var(--white);
+            margin-bottom: 24px;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            flex: 1;
+            padding-top: 4px;
+        }
+
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #111827;
+        }
+
+        .profile-email {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .edit-profile {
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-decoration: none;
+            padding: 6px 0;
+        }
+
+        .balance-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .balance-item {
+            flex: 1;
+            min-width: 140px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: 16px;
+        }
+
+        .balance-item.yellow {
+            background: #FEF9C3;
+        }
+
+        .balance-item.blue {
+            background: #EFF6FF;
+        }
+
+        .balance-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .balance-icon.yellow {
+            background: #FDE047;
+            color: #92400E;
+        }
+
+        .balance-icon.blue {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        .balance-icon i {
+            font-size: 20px;
+        }
+
+        .balance-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .balance-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .balance-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #111827;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .reminder-card {
+            background: var(--white);
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #FDE047;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .reminder-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #4B5563;
+        }
+
+        .reminder-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .card-section {
+            margin-bottom: 24px;
+            padding-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .saved-card {
+            background: #F8FAFC;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .card-icon i {
+            font-size: 20px;
+        }
+
+        .card-details .number {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #111827;
+        }
+
+        .card-details .name {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .card-valid {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .detail-item {
+            text-align: center;
+            padding: 16px;
+            background: var(--white);
+            border-radius: 16px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .detail-item:active {
+            transform: scale(0.98);
+        }
+
+        .detail-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #F1F5F9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: var(--primary-color);
+        }
+
+        .detail-icon i {
+            font-size: 20px;
+        }
+
+        .detail-label {
+            font-size: 13px;
+            color: #4B5563;
+            font-weight: 500;
+        }
+
+        .number-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .eye-button {
+            background: none;
+            border: none;
+            padding: 4px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .eye-button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 380px) {
+            .container {
+                padding: 16px;
+            }
+
+            .profile-card {
+                padding: 16px;
+            }
+
+            .balance-row {
+                flex-direction: column;
+            }
+
+            .balance-item {
+                width: 100%;
+            }
+
+            .balance-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .balance-amount {
+                font-size: 15px;
+            }
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="header-bg"></div> 
+  <div class="container"> 
+   <div class="profile-card"> 
+    <div class="profile-info"> 
+     <div class="profile-avatar"> 
+      <img src="Poto1.png" alt="Profile"> 
+     </div> 
+     <div class="profile-details"> 
+      <div class="profile-name">
+      ID: 583803167
+      </div> 
+      <div class="profile-email">
+       Tingkat: 0
+      </div> 
+     </div> 
+    </div> 
+    <div class="balance-row"> 
+     <div class="balance-item yellow"> 
+      <div class="balance-icon yellow"> 
+       <i class="fas fa-wallet"></i> 
+      </div> 
+      <div class="balance-info"> 
+       <div class="balance-label">
+        Saldo Saya
+       </div> 
+       <div class="balance-amount">
+        Rp 5,000
+       </div> 
+      </div> 
+     </div> 
+     <div class="balance-item blue"> 
+      <div class="balance-icon blue"> 
+       <i class="fas fa-dollar-sign"></i> 
+      </div> 
+      <div class="balance-info"> 
+       <div class="balance-label">
+        Profit hari ini
+       </div> 
+       <div class="balance-amount">
+        Rp 0
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="reminder-card"> 
+    <div class="reminder-title">
+     Total penghasilan
+    </div> 
+    <div class="reminder-date">
+    Rp 5,000
+    </div> 
+   </div> 
+
+   <div class="card-section"> 
+    <div class="section-title">
+     Menu Lain
+    </div> 
+    <div class="details-grid"> 
+     <a href="Qr.html" class="detail-item"> 
+      <div class="detail-icon"> 
+       <i class="fas fa-qrcode"></i> 
+      </div> 
+      <div class="detail-label">
+QR akun
+      </div> </a> 
+     <a href="Bank.html" class="detail-item"> 
+      <div class="detail-icon"> 
+       <i class="fas fa-lock"></i> 
+      </div> 
+      <div class="detail-label">
+       Ubah Password
+      </div> </a> 
+     <a href="Team.html" class="detail-item"> 
+      <div class="detail-icon"> 
+       <i class="fas fa-id-card"></i> 
+      </div> 
+      <div class="detail-label">
+       Promo
+      </div> </a> 
+     <a href="#" class="detail-item"> 
+      <div class="detail-icon"> 
+       <i class="fas fa-bell"></i> 
+      </div> 
+      <div class="detail-label">
+       Customer Service
+      </div> </a> 
+     <a href="Riwayatpenarikan.html" class="detail-item"> 
+      <div class="detail-icon"> 
+       <i class="fas fa-globe"></i> 
+      </div> 
+      <div class="detail-label">
+       Riwayat Penarikan
+      </div> </a> 
+     <a href="Riwayattopup.html" class="detail-item"> 
+      <div class="detail-icon"> 
+       <i class="fas fa-history"></i> 
+      </div> 
+      <div class="detail-label">
+       Riwayat TopUp
+      </div> </a> 
+     <a href="Bonus pendaftaran.html" class="detail-item"> 
+      <div class="detail-icon"> 
+       <i class="fas fa-dollar-sign"></i> 
+      </div> 
+      <div class="detail-label">
+       Riwayat Bonus
+      </div> </a> 
+     <a href="Riwayat.html" class="detail-item"> 
+      <div class="detail-icon"> 
+       <i class="fas fa-history"></i> 
+      </div> 
+      <div class="detail-label">
+       Riwayat Transaksi
+      </div> </a> 
+     <a href="https://letgroregister.github.io/" class="detail-item"> 
+      <div class="detail-icon"> 
+       <i class="fas fa-power-off"></i> 
+      </div> 
+      <div class="detail-label">
+       Log out
+      </div> </a> 
+    </div> 
+   </div> 
+  </div> 
+  <script>
+        function toggleNumber() {
+            const numberElement = document.getElementById('accountNumber');
+            const eyeIcon = document.getElementById('eyeIcon');
+            const originalNumber = '';
+            const maskedNumber = '*'.repeat(originalNumber.length - 4) + originalNumber.slice(-4);
+            
+            if (numberElement.textContent === maskedNumber) {
+                numberElement.textContent = originalNumber;
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                numberElement.textContent = maskedNumber;
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+    </script> 
+  <style>
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: white;
+        border-radius: 24px 24px 0 0;
+        padding: 12px 0 16px;
+        box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.08);
+        z-index: 1000;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #94A3B8;
+        position: relative;
+        z-index: 2;
+        width: 64px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-item i {
+        font-size: 24px;
+        margin-bottom: 6px;
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-item span {
+        font-size: 11px;
+        font-weight: 500;
+        color: #94A3B8;
+        transition: all 0.3s ease;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .nav-item.active {
+        color: #28d;;
+    }
+
+    .nav-item.active i {
+        transform: translateY(-4px);
+    }
+
+    .nav-item.active span {
+        color: #28d;;
+    }
+
+    .nav-indicator {
+        position: absolute;
+        width: 48px;
+        height: 48px;
+        background: #F5F3FF;
+        border-radius: 50%;
+        top: -10px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+    }
+
+    /* Precise positioning for each menu item */
+    .nav-item:nth-child(1).active ~ .nav-indicator { left: calc(10% - 24px); }
+    .nav-item:nth-child(2).active ~ .nav-indicator { left: calc(30% - 24px); }
+    .nav-item:nth-child(3).active ~ .nav-indicator { left: calc(50% - 24px); }
+    .nav-item:nth-child(4).active ~ .nav-indicator { left: calc(70% - 24px); }
+    .nav-item:nth-child(5).active ~ .nav-indicator { left: calc(90% - 24px); }
+
+    @media screen and (max-width: 360px) {
+        .bottom-nav {
+            padding: 10px 0 14px;
+        }
+
+        .nav-container {
+            max-width: 360px;
+        }
+
+        .nav-item {
+            width: 56px;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 10px;
+        }
+
+        .nav-indicator {
+            width: 42px;
+            height: 42px;
+            top: -8px;
+        }
+
+        /* Adjust indicator position for smaller screens */
+        .nav-item:nth-child(1).active ~ .nav-indicator { left: calc(10% - 21px); }
+        .nav-item:nth-child(2).active ~ .nav-indicator { left: calc(30% - 21px); }
+        .nav-item:nth-child(3).active ~ .nav-indicator { left: calc(50% - 21px); }
+        .nav-item:nth-child(4).active ~ .nav-indicator { left: calc(70% - 21px); }
+        .nav-item:nth-child(5).active ~ .nav-indicator { left: calc(90% - 21px); }
+    }
+
+    @supports (padding: max(0px)) {
+        .bottom-nav {
+            padding-bottom: max(16px, env(safe-area-inset-bottom));
+        }
+    }
+</style> 
+  <div class="bottom-nav"> 
+   <div class="nav-container"> 
+    <a href="index.html" class="nav-item "> <i class="fas fa-house"></i> <span>Beranda</span> </a> 
+    
+    
+    <a href="Investasi.html" class="nav-item " style="display: none;"> <i class="fas fa-chart-line"></i> <span>Paket Bulanan</span> </a> 
+    
+    <a href="Investasi.html" class="nav-item "> <i class="fas fa-box"></i> <span>Investasi</span> </a> 
+    
+    <a href="Team.html" class="nav-item "> <i class="fas fa-users"></i> <span>Team</span> </a> 
+    
+    <a href="Profil.html" class="nav-item active"> <i class="fas fa-user"></i> <span>Profil</span> </a> 
+    <div class="nav-indicator"></div> 
+   </div> 
+  </div> 
+ </body>
+</html>
+
+

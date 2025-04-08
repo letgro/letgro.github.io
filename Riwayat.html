@@ -1,0 +1,412 @@
+<html lang="en">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Riwayat Transaksi</title> 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"> 
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: white;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e2ae0c 0%, #e2ae0c 100%);
+            color: white;
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(26, 35, 126, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .back-button {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .back-button:active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .back-arrow {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+
+        .back-arrow::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-left: 2.5px solid white;
+            border-bottom: 2.5px solid white;
+            position: absolute;
+            left: 6px;
+            top: 4px;
+            transform: rotate(45deg);
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            flex: 1;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 16px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #6c757d;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: red;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 8px 16px;
+            margin-bottom: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #495;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .filter-tab.active {
+            background: #28d;
+            color: white;
+            border-color: #28d;
+        }
+
+        .date-group {
+            padding: 14px 16px;
+            background: #f8f9fa;
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .transaction {
+            padding: 16px;
+            border-bottom: 1px solid #f1f3f5;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: background-color 0.2s ease;
+        }
+
+        .transaction:hover {
+            background-color: #f8f9fa;
+        }
+
+        .transaction:active {
+            background-color: #f1f3f5;
+        }
+
+        .transaction-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #28d;
+            font-size: 22px;
+            box-shadow: 0 2px 6px rgba(26, 35, 126, 0.1);
+        }
+
+        .transaction-details {
+            flex: 1;
+        }
+
+        .transaction-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #212529;
+        }
+
+        .transaction-time {
+            font-size: 12px;
+            color: #868e96;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .transaction-time::before {
+            content: "•";
+            font-size: 14px;
+            color: #adb5bd;
+        }
+
+        .transaction-amount {
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: -0.3px;
+        }
+
+        .amount-out {
+            color: #E94F37;
+        }
+
+        .amount-in {
+            color: #e2ae0c;
+        }
+
+        .amount-out::before {
+            content: "-Rp ";
+        }
+
+        .amount-in::before {
+            content: "+Rp ";
+        }
+
+        .status-badge {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-top: 4px;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background-color: #E8F8F0;
+            color: #1B7A44;
+        }
+
+        .status-pending {
+            background-color: #FFF8E6;
+            color: #95631C;
+        }
+
+        .status-failed {
+            background-color: #FEE9E7;
+            color: #C0392B;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 64px 16px;
+            color: #868e96;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: #28d;
+        }
+
+        .pagination {
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .pagination a {
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            color: #495057;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .pagination a:hover {
+            background: #e9ecef;
+        }
+
+        .pagination .active {
+            background: #28d;
+            color: white;
+        }
+
+        @media screen and (min-width: 481px) {
+            body {
+                background: linear-gradient(135deg, #28d 0%, #2835 100%);
+                padding: 20px;
+                min-height: 100vh;
+            }
+            .container {
+                border-radius: 16px;
+                box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+                min-height: auto;
+                overflow: hidden;
+            }
+        }
+    </style> 
+ </head> 
+ <body> 
+  <div class="container"> 
+   <div class="header"> 
+    <a href="index.html" class="back-button"> 
+     <div class="back-arrow"></div> </a> 
+    <h1>Semua Riwayat</h1> 
+   </div> 
+   <div class="stats-container"> 
+    <div class="stat-card"> 
+     <div class="stat-label">
+      Total Transaksi
+     </div> 
+     <div class="stat-value">
+      1x
+     </div> 
+    </div> 
+    <div class="stat-card"> 
+     <div class="stat-label">
+      Total Nominal
+     </div> 
+     <div class="stat-value">
+      5,000
+     </div> 
+    </div> 
+   </div> 
+   <div class="filter-tabs"> 
+    <div class="filter-tab active">
+     Semua
+    </div> 
+    
+
+
+
+
+
+    <div class="filter-tab">
+     Total 
+    </div> 
+   </div> 
+   <div class="date-group">
+    
+   </div> 
+   <div class="transaction"> 
+    <div class="transaction-icon">
+      ✓ 
+    </div> 
+    <div class="transaction-details"> 
+     <div class="transaction-title">
+       Bonus pendaftaran
+     </div> 
+     <div class="transaction-time">
+      Setatus
+     </div> 
+     <div class="status-badge 
+                                                            status-success
+                            ">
+       Success 
+     </div> 
+    </div> 
+    <div class="transaction-amount 
+                                                    amount-in
+                        ">
+      5,000
+    </div> 
+   </div> 
+   <div class="pagination"> 
+    <nav id="pagination"> 
+    </nav> 
+   </div> 
+  </div> 
+  <script>
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Get filter value
+                const filter = tab.textContent.toLowerCase();
+                
+                // Update URL and reload page
+                const url = new URL(window.location.href);
+                if (filter === 'semua') {
+                    url.searchParams.delete('filter');
+                } else {
+                    url.searchParams.set('filter', filter);
+                }
+                window.location.href = url.toString();
+            });
+        });
+
+        // Set active tab based on URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeFilter = urlParams.get('filter');
+        if (activeFilter) {
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                if (tab.textContent.toLowerCase() === activeFilter) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        }
+    </script> 
+ </body>
+</html>
