@@ -1,0 +1,390 @@
+<html>
+ <head> 
+  <meta charset="utf-8"> 
+  <title>Topup Saldo</title> 
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"> 
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"> 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"> 
+  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4CAF 0%, #4CAF50 100%);
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #e2740c;
+            padding: 10px 15px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            max-width: 480px;
+            z-index: 100;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(180deg, rgba(66, 52, 173, 0.2) 0%, rgba(66, 52, 173, 0) 100%);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .back-btn img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .page-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            flex-grow: 1;
+            text-align: center;
+            margin-right: 40px;
+            letter-spacing: -0.3px;
+        }
+
+        .content {
+            padding: 100px 15px 20px;
+            background: linear-gradient(180deg, #EEF2FF 0%, #F8FAFF 100%);
+            min-height: 100vh;
+            border-radius: 32px 32px 0 0;
+            margin-top: -20px;
+            position: relative;
+            box-shadow: 0 -10px 30px rgba(66, 52, 173, 0.1);
+        }
+
+        .input-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 20px rgba(66, 52, 173, 0.06);
+            border: 1px solid rgba(66, 52, 173, 0.05);
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            background: #f8faff;
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+        }
+
+        .currency-label {
+            font-weight: 600;
+            color: #4CAF50;
+            margin-right: 10px;
+        }
+
+        input[type="number"] {
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            color: #2d2d2d;
+            width: 100%;
+            outline: none;
+        }
+
+        .payment-button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 100px;
+            padding: 13px;
+            width: 100%;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-button:active {
+            transform: scale(0.98);
+        }
+
+        .qris-container {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(66, 52, 173, 0.06);
+        }
+
+        .qris-image {
+            max-width: 80%;
+            border-radius: 10px;
+            margin: 20px auto;
+        }
+
+        .payment-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .payment-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4CAF50;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .payment-note {
+            color: #ff4757;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .countdown-timer {
+            background: #fff3f3;
+            color: #ff4757;
+            padding: 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 90%;
+            box-shadow: 0 4px 20px rgba(66, 52, 173, 0.1);
+        }
+
+        .modal-content .payment-amount {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .modal-content .payment-note {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .modal-close {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 100px;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:active {
+            transform: scale(0.98);
+        }
+    </style> 
+  <style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}</style>
+ </head> 
+ 
+ 
+
+ 
+ 
+ 
+  <body> 
+  <div class="header"> 
+   <div class="header-content"> 
+    <div class="back-btn" onclick="window.location.href='index.html'"> 
+     <img src="https://greentea.live/public/left.png" alt="Back"> 
+    </div> 
+    <div class="page-title">
+     Topup Saldo
+    </div> 
+    <div class="back-btn" onclick="window.location.href='Riwayattopup.html'"> 
+<img src="https://greentea.live/public/imgss/iconlog.png" alt="History"> 
+    </div> 
+   </div> 
+  </div> 
+ 
+ 
+
+  <div class="content"> 
+   <div class="input-card"> 
+    <form action="https://greentea.live/user/payment/submit" id="depositSubmit" method="GET"> 
+     <input type="hidden" name="_token" value="Vdf4llqPAx1aTVuiLOhrN51vCxs6G9oJmFQZqQqR"> 
+     <input type="hidden" name="custom_token" value="8543828340069"> 
+     <input type="hidden" id="finalAmountInput" name="finalAmount"> 
+     Masukan Jumlah minimal Rp50,000
+     <div class="input-group"> 
+      <span class="currency-label">Rp</span> 
+      <input type="number" id="amount" name="amount" placeholder="Min(50,000)" autocomplete="off"> 
+     </div> 
+     <div class="gradient-divider"></div> 
+     <button class="payment-button" id="RechargeQRIS" onclick="depositWithQRIS()" type="button">Top up sekarang </button> 
+<b>informasi</b>
+<br>
+1. Minimal Top up adalah Rp50,000
+<br>
+2. Top up dibuka 24/Jam tanpa libur
+<br>
+3. Ketika Top up berhasil Saldo akan terisi otomatis tanpa konfirmasi admin
+<br>
+4. Harap bayar jumlah sesuai yang tertera
+<br>
+5. Jika ada masalah atau pertanyaan bisa hubungi Cs kami✓
+    </form> 
+   </div> 
+   <div class="qris-container" id="qrisImage" style="display: none;"> 
+    <img alt="QRIS payment code" class="qris-image" height="300" src="Qris.png" width="300"> 
+    <p>Pembayaran bisa dilakukan melalui semua bank atau e-wallet.</p> 
+    <div class="payment-info" id="finalAmountText"></div> 
+    <div class="countdown-timer" id="countdownTimer">
+     proses
+    </div> 
+   </div> 
+  </div> 
+  <div class="modal" id="paymentModal"> 
+   <div class="modal-content"> 
+    <div class="payment-amount" id="modalAmount"></div> 
+    <div class="payment-note">
+     Silakan bayar sesuai dengan angka ini untuk verifikasi otomatis.
+    </div> 
+    <button class="modal-close" onclick="closeModal()">Tutup</button> 
+   </div> 
+  </div> 
+  <script>
+        var finalAmount = 0; 
+        var countdown = 1; 
+        var countdownInterval;
+
+        function deposit(){
+            var amount = document.getElementById('amount').value;
+            if (amount == ''){
+                alert("Masukkan jumlah topup");
+                return 0;
+            }
+            var button = document.getElementById('Recharge');
+            button.disabled = true;
+            document.getElementById('depositSubmit').submit();
+        }
+
+        function depositWithQRIS() {
+            var amount = document.getElementById('amount').value;
+
+            if (amount >= 50000) {
+                var mainAmount = Math.floor(amount / 1000);
+                var randomCode = Math.floor(Math.random() * 900 + 100);
+                finalAmount = parseInt(mainAmount + "" + randomCode);
+
+                document.getElementById('finalAmountInput').value = finalAmount;
+                document.getElementById('amount').value = finalAmount;
+
+                document.getElementById('finalAmountText').innerHTML = `
+                    <div class="payment-info">
+                        Jumlah yang harus dibayar: 
+                        <span class="payment-amount">Rp ` + finalAmount.toLocaleString() + `</span>
+                        <p class="payment-note">Silakan bayar sesuai dengan angka ini untuk verifikasi otomatis.</p>
+                    </div>
+                `;
+
+                document.getElementById('qrisImage').style.display = 'block';
+                startCountdown();
+                showModal(finalAmount);
+            } else {
+                alert('Min Top Up adalah Rp(50,000)');
+            }
+        }
+
+        function startCountdown() {
+            countdownInterval = setInterval(function() {
+                countdown--;
+                document.getElementById('countdownTimer').innerHTML = 'Masuk otomatis dalam 5 menit';
+                if (countdown === 0) {
+                    clearInterval(countdownInterval);
+                    proceedWithPayment();
+                }
+            }, 1000);
+        }
+
+        function proceedWithPayment() {
+            var formData = new FormData(document.getElementById('depositSubmit'));
+            fetch("Riwayat.html", {
+                method: 'Get',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Topup berhasil! Order number: " + data.orderNum);
+                } else {
+                    alert("Terjadi kesalahan: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error: ", error);
+                alert(" Silahkan transfer sesuai nominal di bawah dengan kode unik ");
+            });
+        }
+
+        function showModal(amount) {
+            document.getElementById('modalAmount').innerText = 'Rp ' + amount.toLocaleString();
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+    </script> 
+ </body>
+</html>
