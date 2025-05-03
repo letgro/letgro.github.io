@@ -265,16 +265,16 @@
      <input type="hidden" name="_token" value="Vdf4llqPAx1aTVuiLOhrN51vCxs6G9oJmFQZqQqR"> 
      <input type="hidden" name="custom_token" value="8543828340069"> 
      <input type="hidden" id="finalAmountInput" name="finalAmount"> 
-     Masukan Jumlah minimal Rp50,000
+     Masukan Jumlah minimal Rp10,000
      <div class="input-group"> 
       <span class="currency-label">Rp</span> 
-      <input type="number" id="amount" name="amount" placeholder="Min(50,000)" autocomplete="off"> 
+      <input type="number" id="amount" name="amount" placeholder="Min(10,000)" autocomplete="off"> 
      </div> 
      <div class="gradient-divider"></div> 
      <button class="payment-button" id="RechargeQRIS" onclick="depositWithQRIS()" type="button">Top up sekarang </button> 
 <b>informasi</b>
 <br>
-1. Minimal Top up adalah Rp50,000
+1. Minimal Top up adalah Rp10,000
 <br>
 2. Top up dibuka 24/Jam tanpa libur
 <br>
@@ -322,7 +322,7 @@
         function depositWithQRIS() {
             var amount = document.getElementById('amount').value;
 
-            if (amount >= 50000) {
+            if (amount >= 10000) {
                 var mainAmount = Math.floor(amount / 1000);
                 var randomCode = Math.floor(Math.random() * 900 + 100);
                 finalAmount = parseInt(mainAmount + "" + randomCode);
@@ -342,7 +342,7 @@
                 startCountdown();
                 showModal(finalAmount);
             } else {
-                alert('Min Top Up adalah Rp(50,000)');
+                alert('Min Top Up adalah Rp(10,000)');
             }
         }
 
